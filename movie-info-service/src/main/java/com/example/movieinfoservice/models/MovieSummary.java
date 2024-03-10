@@ -1,6 +1,10 @@
 package com.example.movieinfoservice.models;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "movie_db")
 public class MovieSummary {
+
     private String id;
     private String title;
     private String overview;

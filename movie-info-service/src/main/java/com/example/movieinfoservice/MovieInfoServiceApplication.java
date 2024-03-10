@@ -1,5 +1,9 @@
 package com.example.movieinfoservice;
 
+import com.example.movieinfoservice.dao.MovieRepository;
+import com.example.movieinfoservice.models.MovieSummary;
+import com.example.movieinfoservice.services.MovieService;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
@@ -13,14 +17,14 @@ import org.springframework.web.client.RestTemplate;
 @EnableCircuitBreaker
 public class MovieInfoServiceApplication {
 
-    private final int TIMEOUT = 3000;   // 3 seconds
+//    private final int TIMEOUT = 3000;   // 3 seconds
 
-    @Bean
-    public RestTemplate getRestTemplate() {
-        HttpComponentsClientHttpRequestFactory clientHttpRequestFactory = new HttpComponentsClientHttpRequestFactory();
-        clientHttpRequestFactory.setConnectTimeout(TIMEOUT);   // Set the timeout to 3 seconds
-        return new RestTemplate();
-    }
+//    @Bean
+//    public RestTemplate getRestTemplate() {
+//        HttpComponentsClientHttpRequestFactory clientHttpRequestFactory = new HttpComponentsClientHttpRequestFactory();
+//        clientHttpRequestFactory.setConnectTimeout(TIMEOUT);   // Set the timeout to 3 seconds
+//        return new RestTemplate();
+//    }
 
     public static void main(String[] args) {
         SpringApplication.run(MovieInfoServiceApplication.class, args);
