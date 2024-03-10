@@ -1,24 +1,32 @@
 package com.example.ratingsservice.resources;
 
+import com.example.ratingsservice.dao.RatingRepository;
 import com.example.ratingsservice.models.Rating;
 import com.example.ratingsservice.models.UserRating;
+import com.example.ratingsservice.services.RatingService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Arrays;
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/ratings")
 public class RatingsResource {
 
-    @RequestMapping("/{userId}")
-    public UserRating getRatingsOfUser(@PathVariable String userId) {
-        List<Rating> ratings = Arrays.asList(
-                new Rating("550", 4)
-        );
+    private final RatingService ratingService;
 
-        return new UserRating(ratings);
+    public RatingsResource(RatingService ratingService) {
+        this.ratingService = ratingService;
+    }
+
+
+    @GetMapping("/{userId}")
+    public UserRating getRatingsOfUser(@PathVariable String userId) {
+        return ratingService.getUserRating(userId);
+
     }
 }
