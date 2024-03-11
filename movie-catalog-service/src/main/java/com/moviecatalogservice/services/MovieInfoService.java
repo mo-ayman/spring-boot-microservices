@@ -62,7 +62,6 @@ public class MovieInfoService {
         return new CatalogTrendingItem(movie.getName(), movie.getDescription(), rating.getRating());
     }
 
-
     public CatalogTrendingItem getFallbackCatalogTrendingItem(AverageRating rating) {
         return new CatalogTrendingItem("Movie name not found", "", rating.getRating());
     }

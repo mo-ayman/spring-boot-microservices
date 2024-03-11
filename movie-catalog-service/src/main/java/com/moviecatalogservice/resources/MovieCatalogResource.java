@@ -23,6 +23,7 @@ public class MovieCatalogResource {
     private final RestTemplate restTemplate;
     private final MovieInfoService movieInfoService;
     private final UserRatingService userRatingService;
+
     @Autowired
     private GrpcClientService grpcClientService;
 
@@ -49,10 +50,9 @@ public class MovieCatalogResource {
         return ratings.stream().map(movieInfoService::getCatalogItem).collect(Collectors.toList());
     }
 
-    @RequestMapping("/top-ten")
+    @RequestMapping("/trending")
     public List<CatalogTrendingItem> getCatalog() {
         List<AverageRating> topTenRatings = grpcClientService.getTopTenMovies();
-//        System.out.println("topTenRatings = " + topTenRatings);
         return topTenRatings.stream().map(movieInfoService::getCatalogTrendingItem).collect(Collectors.toList());
     }
 }

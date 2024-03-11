@@ -1,8 +1,8 @@
 package com.example.ratingsservice.services;
 
 import com.example.ratingsservice.dao.RatingRepository;
-import com.example.ratingsservice.models.AVGRating;
-import com.example.ratingsservice.models.AVGRatingList;
+import com.example.ratingsservice.models.AverageRating;
+import com.example.ratingsservice.models.AverageRatingList;
 import com.example.ratingsservice.models.UserRating;
 
 import org.springframework.stereotype.Service;
@@ -23,8 +23,8 @@ public class RatingService {
         return new UserRating(ratingRepository.findRatingsByUserId(userId));
     }
 
-    public AVGRatingList getTopRatings(int count) {
-        List<AVGRating> topRatings = ratingRepository.findTopRatings();
-        return new AVGRatingList(topRatings.subList(0, min(count, topRatings.size())));
+    public AverageRatingList getTopRatings(int count) {
+        List<AverageRating> topRatings = ratingRepository.findTopRatings();
+        return new AverageRatingList(topRatings.subList(0, min(count, topRatings.size())));
     }
 }

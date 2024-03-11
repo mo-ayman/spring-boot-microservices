@@ -1,13 +1,13 @@
 package com.example.ratingsservice.models;
 
-public class AVGRating {
+public class AverageRating {
     private String movieId;
     private double avgRating;
 
-    public AVGRating() {
+    public AverageRating() {
     }
 
-    public AVGRating(String movieId, double avgRating) {
+    public AverageRating(String movieId, double avgRating) {
         this.movieId = movieId;
         this.avgRating = avgRating;
     }

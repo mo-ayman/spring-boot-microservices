@@ -3,7 +3,6 @@ package com.moviecatalogservice.services;
 import com.moviecatalogservice.models.AverageRating;
 import com.moviecatalogservice.proto.TrendingMoviesGrpc;
 import com.moviecatalogservice.proto.TrendingMoviesOuterClass;
-import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -19,11 +18,8 @@ public class GrpcClientService {
     @Autowired
     private EurekaClient client;
 
-
     public List<AverageRating> getTopTenMovies() {
         try {
-//            final InstanceInfo instanceInfo = client.getNextServerFromEureka("GrpcStarterServer", false);
-//            System.out.println("GrpcStarterServer instanceInfo.getIPAddr():" + instanceInfo.getIPAddr() + " instanceInfo.getPort():" + instanceInfo.getPort());
             final ManagedChannel channel = ManagedChannelBuilder.forAddress("192.168.56.1", 9090).usePlaintext().build();
             final TrendingMoviesGrpc.TrendingMoviesBlockingStub trendingMoviesBlockingStub = TrendingMoviesGrpc.newBlockingStub(channel);
 
