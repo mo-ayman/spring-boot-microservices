@@ -1,10 +1,8 @@
 package com.example.ratingsservice.resources;
 
-import com.example.ratingsservice.dao.RatingRepository;
-import com.example.ratingsservice.models.Rating;
+import com.example.ratingsservice.models.AVGRating;
 import com.example.ratingsservice.models.UserRating;
 import com.example.ratingsservice.services.RatingService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +28,7 @@ public class RatingsResource {
     }
     // get the top movies by ratings
     @GetMapping("/top/{count}")
-    public List<Rating> getTopRatings(@PathVariable int count) {
+    public List<AVGRating> getTopRatings(@PathVariable int count) {
         return ratingService.getTopRatings(count);
     }
 }
