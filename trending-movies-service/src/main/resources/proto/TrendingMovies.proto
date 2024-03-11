@@ -1,0 +1,18 @@
+syntax = "proto3";
+option java_package = "com.example.trendingservice.proto";
+
+service TrendingMovies {
+  rpc GetTopTenMovies (Empty) returns (GetTopTenMoviesReply) {}
+}
+
+message GetTopTenMoviesReply {
+  repeated MovieRating movieRatings = 1;
+}
+
+message Empty {
+}
+
+message MovieRating {
+  string movieId = 1;
+  float rating = 2;
+}
