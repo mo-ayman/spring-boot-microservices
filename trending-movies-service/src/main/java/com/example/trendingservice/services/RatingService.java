@@ -1,6 +1,7 @@
 package com.example.trendingservice.services;
 
 import com.example.trendingservice.models.AVGRating;
+import com.example.trendingservice.models.AVGRatingList;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import org.springframework.stereotype.Service;
@@ -28,9 +29,9 @@ public class RatingService {
                 // Wait/Sleep for 5 seconds before sending another request to the failed service
                 @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "5000")
         })
-    public AVGRating getTrendingMovies() {
-        String ratingsUrl = "http://ratings-data-service/top/10";
-        return Objects.requireNonNull(restTemplate.getForObject(ratingsUrl, AVGRating.class));
+    public AVGRatingList getTrendingMovies() {
+        String ratingsUrl = "http://ratings-data-service/ratings/top/10";
+        return Objects.requireNonNull(restTemplate.getForObject(ratingsUrl, AVGRatingList.class));
     }
 
     public AVGRating getFallbackTrendingMovies() {

@@ -2,6 +2,7 @@ package com.example.ratingsservice.services;
 
 import com.example.ratingsservice.dao.RatingRepository;
 import com.example.ratingsservice.models.AVGRating;
+import com.example.ratingsservice.models.AVGRatingList;
 import com.example.ratingsservice.models.UserRating;
 
 import org.springframework.stereotype.Service;
@@ -22,8 +23,8 @@ public class RatingService {
         return new UserRating(ratingRepository.findRatingsByUserId(userId));
     }
 
-    public List<AVGRating> getTopRatings(int count) {
+    public AVGRatingList getTopRatings(int count) {
         List<AVGRating> topRatings = ratingRepository.findTopRatings();
-        return topRatings.subList(0, min(count, topRatings.size()));
+        return new AVGRatingList(topRatings.subList(0, min(count, topRatings.size())));
     }
 }

@@ -1,5 +1,6 @@
 package com.example.trendingservice.services;
 
+import com.example.trendingservice.models.AVGRating;
 import com.example.trendingservice.proto.TrendingMoviesGrpc;
 import com.example.trendingservice.proto.TrendingMoviesOuterClass;
 import io.grpc.stub.StreamObserver;
@@ -7,22 +8,31 @@ import net.devh.boot.grpc.server.service.GrpcService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+
 @GrpcService
 public class TrendingMoviesService extends TrendingMoviesGrpc.TrendingMoviesImplBase {
 
-    @Autowired
-    private RestTemplate restTemplate;
+//    @Autowired
+//    private RestTemplate restTemplate;
+
+    private final RestTemplate restTemplate;
+
+    public TrendingMoviesService(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
     @Override
     public void getTopTenMovies(TrendingMoviesOuterClass.Empty request, StreamObserver<TrendingMoviesOuterClass.GetTopTenMoviesReply> responseObserver) {
         TrendingMoviesOuterClass.GetTopTenMoviesReply.Builder response = TrendingMoviesOuterClass.GetTopTenMoviesReply.newBuilder();
-
-        // Pass rest template to the service
+        
         RatingService ratingService = new RatingService(restTemplate);
 
-        System.out.println(ratingService.getTrendingMovies());
+        List<AVGRating> topRatings = ratingService.getTrendingMovies().getAvgRatings();
 
-        response.addMovieRatings(TrendingMoviesOuterClass.MovieRating.newBuilder().setMovieId("27205").setRating(5).build());
+        for (AVGRating rating : topRatings) {
+            response.addMovieRatings(TrendingMoviesOuterClass.MovieRating.newBuilder().setMovieId(rating.getMovieId()).setRating((float) rating.getAvgRating()).build());
+        }
 
         responseObserver.onNext(response.build());
         responseObserver.onCompleted();

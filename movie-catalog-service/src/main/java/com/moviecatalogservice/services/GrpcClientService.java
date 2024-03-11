@@ -22,9 +22,9 @@ public class GrpcClientService {
 
     public List<AverageRating> getTopTenMovies() {
         try {
-            final InstanceInfo instanceInfo = client.getNextServerFromEureka("GrpcStarterServer", false);
-            System.out.println("GrpcStarterServer instanceInfo.getIPAddr():" + instanceInfo.getIPAddr() + " instanceInfo.getPort():" + instanceInfo.getPort());
-            final ManagedChannel channel = ManagedChannelBuilder.forAddress(instanceInfo.getIPAddr(), instanceInfo.getPort()).usePlaintext().build();
+//            final InstanceInfo instanceInfo = client.getNextServerFromEureka("GrpcStarterServer", false);
+//            System.out.println("GrpcStarterServer instanceInfo.getIPAddr():" + instanceInfo.getIPAddr() + " instanceInfo.getPort():" + instanceInfo.getPort());
+            final ManagedChannel channel = ManagedChannelBuilder.forAddress("192.168.56.1", 9090).usePlaintext().build();
             final TrendingMoviesGrpc.TrendingMoviesBlockingStub trendingMoviesBlockingStub = TrendingMoviesGrpc.newBlockingStub(channel);
 
             TrendingMoviesOuterClass.Empty empty = TrendingMoviesOuterClass.Empty.newBuilder().build();

@@ -38,7 +38,7 @@ public class MovieInfoService {
         return new CatalogItem(movie.getName(), movie.getDescription(), rating.getRating());
     }
 
-    @HystrixCommand(fallbackMethod = "getFallbackCatalogItem",
+    @HystrixCommand(fallbackMethod = "getFallbackCatalogTrendingItem",
             threadPoolKey = "movieInfoPool",
             threadPoolProperties = {
                     @HystrixProperty(name = "coreSize", value = "20"),  // Size of thread pool
@@ -55,6 +55,7 @@ public class MovieInfoService {
                     @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "5000")
             })
     public CatalogTrendingItem getCatalogTrendingItem(AverageRating rating) {
+        System.out.println("rating = " + rating.getMovieId());
         String movieDetailsUrl = "http://movie-info-service/movies/" + rating.getMovieId();
         Movie movie = this.restTemplate.getForObject(movieDetailsUrl, Movie.class);
         assert movie != null;
@@ -62,7 +63,7 @@ public class MovieInfoService {
     }
 
 
-    public CatalogItem getFallbackCatalogItem(Rating rating) {
-        return new CatalogItem("Movie name not found", "", rating.getRating());
+    public CatalogTrendingItem getFallbackCatalogTrendingItem(AverageRating rating) {
+        return new CatalogTrendingItem("Movie name not found", "", rating.getRating());
     }
 }

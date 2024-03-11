@@ -1,6 +1,7 @@
 package com.example.ratingsservice.resources;
 
 import com.example.ratingsservice.models.AVGRating;
+import com.example.ratingsservice.models.AVGRatingList;
 import com.example.ratingsservice.models.UserRating;
 import com.example.ratingsservice.services.RatingService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +29,7 @@ public class RatingsResource {
     }
     // get the top movies by ratings
     @GetMapping("/top/{count}")
-    public List<AVGRating> getTopRatings(@PathVariable int count) {
+    public AVGRatingList getTopRatings(@PathVariable int count) {
         return ratingService.getTopRatings(count);
     }
 }

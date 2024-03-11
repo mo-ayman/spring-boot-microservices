@@ -49,7 +49,7 @@ public class MovieCatalogResource {
         return ratings.stream().map(movieInfoService::getCatalogItem).collect(Collectors.toList());
     }
 
-    @RequestMapping("/trending")
+    @RequestMapping("/top-ten")
     public List<CatalogTrendingItem> getCatalog() {
         List<AverageRating> topTenRatings = grpcClientService.getTopTenMovies();
 //        System.out.println("topTenRatings = " + topTenRatings);
