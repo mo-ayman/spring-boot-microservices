@@ -5,6 +5,7 @@ import com.example.ratingsservice.models.AverageRating;
 import com.example.ratingsservice.models.AverageRatingList;
 import com.example.ratingsservice.models.UserRating;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class RatingService {
     }
 
     public AverageRatingList getTopRatings(int count) {
-        List<AverageRating> topRatings = ratingRepository.findTopRatings();
+        List<AverageRating> topRatings = ratingRepository.findTopRatings(PageRequest.of(0, 10));
         return new AverageRatingList(topRatings.subList(0, min(count, topRatings.size())));
     }
 }
