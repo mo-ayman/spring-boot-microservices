@@ -23,10 +23,14 @@ public class RatingsResource {
         this.ratingService = ratingService;
     }
 
-
+    // get the ratings of a user
     @GetMapping("/{userId}")
     public UserRating getRatingsOfUser(@PathVariable String userId) {
         return ratingService.getUserRating(userId);
-
+    }
+    // get the top movies by ratings
+    @GetMapping("/top/{count}")
+    public List<Rating> getTopRatings(@PathVariable int count) {
+        return ratingService.getTopRatings(count);
     }
 }
