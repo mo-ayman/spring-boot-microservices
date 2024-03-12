@@ -20,7 +20,7 @@
       <module name="movie-catalog-service" options="-parameters" />
       <module name="movie-info-service" options="-parameters" />
       <module name="ratings-service" options="-parameters" />
-      <module name="ratings-service (1)" options="-parameters" />
+      <module name="ratings-service (1)" options="" />
     </option>
   </component>
 </project>
